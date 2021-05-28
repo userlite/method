@@ -2,6 +2,10 @@ _isObject = function (check) {
   return typeof check === 'object' && check !== null
 }
 
+const defaultErrorMessage = {
+  message: false,
+  field: false
+}
 class Method {
   valid = true
   warnings = []
@@ -15,6 +19,7 @@ class Method {
     this.valid = false
     messages.forEach((message) => {
       if (!_isObject(message)) message = { message }
+      message = { ...defaultErrorMessage, ...message }
       this.errors.push(message)
     })
   }
